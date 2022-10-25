@@ -1,0 +1,55 @@
+.weather {
+  max-width: 600px;
+  padding: 30px 30px 0 30px;
+  background-image: linear-gradient(to bottom, rgb(245, 228, 244), white);
+  border-radius: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form {
+  padding-bottom: 25px;
+}
+h1.city-info {
+  color: rebeccapurple;
+  font-size: 35px;
+}
+h5 {
+  font-size: 20px;
+}
+h6.forecast {
+  font-size: 15px;
+  color: rgb(104, 104, 104);
+  font-weight: 300;
+}
+a.link {
+  text-decoration: none;
+}
+
+.card {
+  margin: 25px auto;
+}
+
+.week-temp {
+  font-size: 10px;
+}
+.temp-unit {
+  position: relative;
+  top: -15px;
+  font-size: 15px;
+  line-height: 4px;
+}
+
+#city-name,
+#weather-description {
+  text-transform: capitalize;
+}
+#celsius-link {
+  color: rebeccapurple;
+}
+#coded-by {
+  font-size: 8px;
+  color: rgb(93, 92, 92);
+  text-align: right;
+  padding-top: 16px;
+  padding-bottom: 4px;
+}
