@@ -40,12 +40,15 @@ function showWeather(response) {
   document.querySelector("#feels-like").innerHTML = Math.round(
     response.data.main.feels_like
   );
+  feelsLike = response.data.main.feels_like;
   document.querySelector("#temp-max").innerHTML = Math.round(
     response.data.main.temp_max
   );
+  maxTemp = response.data.main.temp_max;
   document.querySelector("#temp-min").innerHTML = Math.round(
     response.data.main.temp_min
   );
+  minTemp = response.data.main.temp_min;
   document.querySelector("#date").innerHTML = formatDate(
     response.data.dt * 1000
   );
@@ -82,6 +85,9 @@ function convertTempC(event) {
   linkC.classList.add("active");
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = Math.round(celsiusTemp);
+  document.querySelector("#feels-like").innerHTML = Math.round(feelsLike);
+  document.querySelector("#temp-max").innerHTML = Math.round(maxTemp);
+  document.querySelector("#temp-min").innerHTML = Math.round(minTemp);
 }
 
 function convertTempF(event) {
@@ -90,6 +96,15 @@ function convertTempF(event) {
   linkF.classList.add("active");
   let currentTemp = document.querySelector("#current-temp");
   currentTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
+  document.querySelector("#feels-like").innerHTML = Math.round(
+    (feelsLike * 9) / 5 + 32
+  );
+  document.querySelector("#temp-max").innerHTML = Math.round(
+    (maxTemp * 9) / 5 + 32
+  );
+  document.querySelector("#temp-min").innerHTML = Math.round(
+    (minTemp * 9) / 5 + 32
+  );
 }
 
 function showMyLocation(position) {
@@ -119,5 +134,8 @@ myLocationButton.addEventListener("click", getMyLocation);
 let tempUnit = "metric";
 let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
 let celsiusTemp = null;
+let feelsLike = null;
+let maxTemp = null;
+let minTemp = null;
 
 searchWeather("Bengaluru");
