@@ -1,5 +1,5 @@
-function formatDate() {
-  let now = new Date();
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
 
   let days = [
     "Sunday",
@@ -24,7 +24,7 @@ function formatDate() {
 }
 
 function showWeather(response) {
-  console.log(response);
+  //console.log(response);
 
   document.querySelector(
     "#city-name"
@@ -45,6 +45,15 @@ function showWeather(response) {
   document.querySelector("#temp-min").innerHTML = Math.round(
     response.data.main.temp_min
   );
+  document.querySelector("#date").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
+  document
+    .querySelector("#temp-icon")
+    .setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
 }
 
 function searchWeather(city) {
@@ -92,8 +101,8 @@ function getMyLocation(event) {
   navigator.geolocation.getCurrentPosition(showMyLocation);
 }
 
-let currentTime = document.querySelector("#date");
-currentTime.innerHTML = formatDate();
+//let currentTime = document.querySelector("#date");
+//currentTime.innerHTML = formatDate();
 //console.log(formatDate());
 
 let formSearch = document.querySelector("#search-form");

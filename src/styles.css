@@ -1,6 +1,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 auto;
+  text-align: center;
 }
 .weather {
   max-width: 600px;
@@ -15,9 +16,7 @@ form {
 h1.city-info {
   color: rebeccapurple;
   font-size: 40px;
-  margin: 0 auto;
   text-align: center;
-  padding-bottom: 25px;
 }
 h5 {
   font-size: 18px;
@@ -32,7 +31,6 @@ h6.forecast {
 
 a.link {
   text-decoration: none;
-  color: rebeccapurple;
 }
 
 .card {
@@ -53,7 +51,7 @@ a.link {
 }
 .temp-unit {
   position: relative;
-  top: -15px;
+  top: -25px;
   font-size: 15px;
   line-height: 4px;
 }
@@ -64,8 +62,15 @@ a.link {
 #weather-description {
   text-transform: capitalize;
 }
-#celsius-link {
+#current-temp {
+  font-size: 50px;
   color: rebeccapurple;
+}
+#celsius-link {
+  color: rgb(57, 27, 88);
+}
+#fahrenhite-link {
+  color: rgb(124, 104, 144);
 }
 #date {
   text-align: right;
