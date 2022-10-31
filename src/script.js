@@ -21,17 +21,18 @@ function formatDate(timestamp) {
     mins = "0".concat(`${mins}`);
   }
   return `${day}, ${hours}:${mins}`;
+  //console.log(formatDate());
 }
 
 function showWeather(response) {
   //console.log(response);
-
   document.querySelector(
     "#city-name"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
+  celsiusTemp = response.data.main.temp;
   document.querySelector("#weather-description").innerHTML =
     response.data.weather[0].description;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
@@ -54,11 +55,12 @@ function showWeather(response) {
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
+  document
+    .querySelector("#temp-icon")
+    .setAttribute("alt", response.data.weather[0].description);
 }
 
 function searchWeather(city) {
-  let tempUnit = "metric";
-  let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${tempUnit}&appid=${apiKey}`;
   axios.get(apiUrl).then(showWeather);
 }
@@ -76,22 +78,23 @@ function searchCity(event) {
 
 function convertTempC(event) {
   event.preventDefault();
+  linkF.classList.remove("active");
+  linkC.classList.add("active");
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = "";
+  currentTemp.innerHTML = Math.round(celsiusTemp);
 }
 
 function convertTempF(event) {
   event.preventDefault();
+  linkC.classList.remove("active");
+  linkF.classList.add("active");
   let currentTemp = document.querySelector("#current-temp");
-  currentTemp.innerHTML = Math.round((0 * 9) / 5 + 32);
+  currentTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
 }
 
 function showMyLocation(position) {
   let lat = position.coords.latitude;
   let long = position.coords.longitude;
-  let tempUnit = "metric";
-  let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${tempUnit}&appid=${apiKey}`;
   axios.get(apiUrl).then(showWeather);
 }
@@ -101,20 +104,20 @@ function getMyLocation(event) {
   navigator.geolocation.getCurrentPosition(showMyLocation);
 }
 
-//let currentTime = document.querySelector("#date");
-//currentTime.innerHTML = formatDate();
-//console.log(formatDate());
-
 let formSearch = document.querySelector("#search-form");
 formSearch.addEventListener("submit", searchCity);
 
-//let linkC = document.querySelector("#celsius-link");
-//linkC.addEventListener("click", convertTempC);
+let linkC = document.querySelector("#celsius-link");
+linkC.addEventListener("click", convertTempC);
 
-//let linkF = document.querySelector("#fahrenhite-link");
-//linkF.addEventListener("click", convertTempF);
+let linkF = document.querySelector("#fahrenhite-link");
+linkF.addEventListener("click", convertTempF);
 
 let myLocationButton = document.querySelector("#my-location");
 myLocationButton.addEventListener("click", getMyLocation);
+
+let tempUnit = "metric";
+let apiKey = "40b745c14eadad7b7c4e6e4bf3b70103";
+let celsiusTemp = null;
 
 searchWeather("Bengaluru");
