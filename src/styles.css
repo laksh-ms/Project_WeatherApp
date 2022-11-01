@@ -23,7 +23,7 @@ h5 {
   color: lightslategray;
   text-align: center;
 }
-h6.forecast {
+div.forecast {
   font-size: 15px;
   color: rgb(104, 104, 104);
   font-weight: 300;
