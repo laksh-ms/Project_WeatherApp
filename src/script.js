@@ -21,14 +21,13 @@ function formatDate(timestamp) {
     mins = "0".concat(`${mins}`);
   }
   return `${day}, ${hours}:${mins}`;
-  //console.log(formatDate());
 }
 
 function showWeather(response) {
-  //console.log(response);
   document.querySelector(
     "#city-name"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
+  document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#current-temp").innerHTML = Math.round(
     response.data.main.temp
   );
@@ -50,6 +49,9 @@ function showWeather(response) {
   );
   minTemp = response.data.main.temp_min;
   document.querySelector("#date").innerHTML = formatDate(
+    response.data.dt * 1000 + timeOffSet * 60000 + response.data.timezone * 1000
+  );
+  document.querySelector("#lastUpdatedDate").innerHTML = formatDate(
     response.data.dt * 1000
   );
   document
@@ -71,7 +73,6 @@ function searchWeather(city) {
 function searchCity(event) {
   event.preventDefault();
   let searchCity = document.querySelector("#search-city");
-  console.log(searchCity.value);
   if (searchCity.value !== null) {
     searchWeather(searchCity.value);
   } else {
@@ -137,5 +138,6 @@ let celsiusTemp = null;
 let feelsLike = null;
 let maxTemp = null;
 let minTemp = null;
-
+let localDate = new Date();
+let timeOffSet = localDate.getTimezoneOffset();
 searchWeather("Bengaluru");
